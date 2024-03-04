@@ -1,0 +1,138 @@
+import customtkinter as ctk
+import random
+
+
+
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("dark-blue")
+
+
+    
+def jogar():
+    
+    #def = bloco de comandos que serão executados enquanto o programa não parar ou for fechado
+    
+    escolha_usuario = escolha_var.get()
+    
+    
+    # get é um comando usado para guardar a informação digitada
+    
+    
+    escolhas = ['Pedra', 'Papel', 'Tesoura']
+    escolha_computador = random.choice(escolhas)
+    
+    
+    #sistema para escolhas o comando radom.choice garantem que as escolhas da máquina serão aleatórias
+    
+
+    resultado = ''
+    
+    
+    # essa linha demonstra o possível resultado que será lido pelo programa
+    
+    
+
+    if escolha_usuario == escolha_computador:
+        resultado = "Empate! Ambos escolheram " + escolha_usuario
+        
+        #Posiblidades de resultados - comparando a escolha do usuário e computador
+        
+        
+    elif (escolha_usuario == 'Pedra' and escolha_computador == 'Tesoura') or \
+         (escolha_usuario == 'Papel' and escolha_computador == 'Pedra') or \
+         (escolha_usuario == 'Tesoura' and escolha_computador == 'Papel'):
+        resultado = "Você ganhou! " + " Seu adversário escolheu " +  escolha_computador
+        
+           
+        #possibilidades do usuário ganhar
+        # or\ é um comando que simplifica o código e se faz desnecessário o uso de ifs e elifs para chegar aos resultados
+        
+        
+    else:
+        resultado = "Você perdeu! " + " Seu adversário escolheu " +  escolha_computador 
+        
+        
+        # O restante dos resultados comprova que a máquina ganhou
+    
+    
+    
+    
+    
+    resultado_window = ctk.CTk()
+    resultado_window.geometry("400x200")
+    resultado_window.title("Resultado")
+    janela.resizable(False, False)
+
+
+    # Campo de Pop Up para demonstrar o resultado da partida ao usuário
+    # Comando Janela.resizable garante que a janela não possa ser alterada
+    
+    
+    resultado_label = ctk.CTkLabel(resultado_window, text=resultado)
+    resultado_label.pack(expand=True, fill='both', padx=20, pady=20)
+    
+    
+    #Definição do Pop Up
+    
+    
+
+    resultado_window.mainloop()
+
+
+
+janela = ctk.CTk()
+janela.geometry("600x400")
+janela.resizable(False, False)
+
+
+
+escolha_var = ctk.StringVar(janela)
+
+
+
+# Expecificação da variável escolha_var que irá armazenar a escolha do usuário dentro da tela do customtkinter
+
+
+
+escolha_label = ctk.CTkLabel(janela, text="Escolha uma opção:")
+escolha_label.pack(pady=10)
+
+
+# Campo onde mostrará as opções
+# O comando pack organiza os widgets (que são os meios de interção com o usuário)
+
+
+frame_botoes = ctk.CTkFrame(janela)
+frame_botoes.pack()
+
+
+# O comando frame agrupa os botões em um côntainer
+
+
+escolha_pedra = ctk.CTkRadioButton(frame_botoes, text="Pedra", variable=escolha_var, value="Pedra")
+escolha_pedra.pack(side="left", padx=(0, 10), pady=10)
+
+
+# É utilizado o comando variable que dá o significado/ valor para a ligação com o comando listado no início do código o mesmo serve para os seguintes
+# A função Radio permite dizer que é uma função exclusiva e opção única
+
+
+escolha_papel = ctk.CTkRadioButton(frame_botoes, text="Papel", variable=escolha_var, value="Papel")
+escolha_papel.pack(side="left", padx=(0, 10), pady=10)
+
+
+
+escolha_tesoura = ctk.CTkRadioButton(frame_botoes, text="Tesoura", variable=escolha_var, value="Tesoura")
+escolha_tesoura.pack(side="left", padx=(0, 10), pady=10)
+
+
+
+jogar_botao = ctk.CTkButton(janela, text="Jogar", command=jogar)
+jogar_botao.pack(pady=10)
+
+
+
+# Botão para iniciar o jogo onde o comando Janela, interliga com a abertura da do resultado
+
+
+janela.mainloop()
